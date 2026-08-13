@@ -1,0 +1,14 @@
+build/
+debug/
+tests/
+test/
+.test/
+*.log
+*.out
+*.exe
+*.o
+
+venv/
+.venv/
+.vscode/
+

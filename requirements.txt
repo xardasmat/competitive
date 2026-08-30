@@ -1,2 +1,6 @@
 online-judge-tools
 competitive-verifier
+setuptools
+# oj
+# openpyxl
+# pandas

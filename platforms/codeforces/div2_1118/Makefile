@@ -1,6 +1,7 @@
 
 CXX=c++
 FLAGS=-std=c++23 -O3
+DFLAGS=-std=c++23 -O0 -DDEBUG -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC
 
 build/%: %.cpp build
 	${CXX} ${FLAGS} -DNDEBUG -o $@ $<
@@ -15,7 +16,7 @@ build/interactor_%: %.cpp build
 	${CXX} ${FLAGS} -DINTERACTOR -o $@ $<
 
 debug/%: %.cpp debug
-	${CXX} ${FLAGS} -g -o $@ $<
+	${CXX} ${DFLAGS} -g -o $@ $<
 
 test_%: build/%
 	oj test -c build/$* -d tests/$*/

@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug solution with selected test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/debug/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${fileDirname}/${input:dynamicTest}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Debug compile"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "dynamicTest",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "(cd \"`dirname \"${file}\"`\" && find \"tests/${fileBasenameNoExtension}\" -type f -name \"*.in\")",
+            }
+        }
+    ]
+}

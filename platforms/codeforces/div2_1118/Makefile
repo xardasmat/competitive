@@ -11,11 +11,17 @@ build/ut_%: %.cpp build
 build/gen_%: %.cpp build
 	${CXX} ${FLAGS} -DGEN -o $@ $<
 
+build/interactor_%: %.cpp build
+	${CXX} ${FLAGS} -DINTERACTOR -o $@ $<
+
 debug/%: %.cpp debug
 	${CXX} ${FLAGS} -g -o $@ $<
 
 test_%: build/%
 	oj test -c build/$* -d tests/$*/
+
+testi_%: build/% build/interactor_%
+	oj test-interactive -c build/$* "build/interactor_$* tests/$*/1.in"
 
 ut_%: build/ut_%
 	$< --gtest_color=yes

@@ -90,8 +90,8 @@ bool query(int a, int b, int d) {
     return res == 1;
 }
 
-int get_len(int a,int b, int n) {
-    int l = 1, r = n;
+int get_len(int a,int b, int min, int n) {
+    int l = min, r = n;
     while (l < r) {
         int m = (l+r+1)/2;
         if (query(a, b, m)) l = m;
@@ -105,16 +105,20 @@ void solve() {
     std::cin >> n;
 
     int max_len = 0;
-    int a, b;
-    for (int i=1;i<=n;++i)
-        for (int j=i+1;j<=n;++j) {
-            int len = get_len(i, j, n);
-            if (len > max_len) {
-                max_len = len;
-                a = i;
-                b = j;
-            }
+    int a = 1, b = 2;
+    max_len = 1;
+    while (max_len < n-1 && query(a, b, max_len+1)) ++max_len;
+    for (int i=3;i<=n;++i) {
+        int a_i = 0;
+        int b_i = 0;
+        while (max_len < n-1 && query(a, i, max_len+1)) ++max_len, ++a_i;
+        while (max_len < n-1 && query(i, b, max_len+1)) ++max_len, ++b_i;
+        if (b_i > 0) {
+            a = i;
+        } else if (a_i > 0) {
+            b = i;
         }
+    }
     std::cout << "! " << a << " " << b << " " << max_len << std::endl;
 }
 

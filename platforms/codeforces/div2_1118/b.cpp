@@ -2,13 +2,14 @@
 #include <algorithm>
 #include <vector>
 
+#ifdef UT
+#include <gtest/gtest.h>
+#endif
+
 const int MAX = 200001;
 int64_t A[MAX];
 int64_t DD[MAX];
 int64_t DDp[MAX];
-
-//1 2 3 4 4
-
 
 void solve() {
     int64_t n, m;
